@@ -1,10 +1,10 @@
+import java.util.List;
+
 /**
  * @author Bradley Read
  * @version 1.0
  * @since 03-02-2020
  */
-
-import java.util.List;
 
 public interface Directory {
 
