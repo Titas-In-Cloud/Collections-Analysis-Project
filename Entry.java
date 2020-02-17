@@ -1,9 +1,28 @@
 
 public class Entry {
 
-    String surname;
-    String initials;
-    String number;
+    private String surname;
+    private String initials;
+    private int number;
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getInitials() {
+        return initials;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setEntry(String newSurname, String newInitials, int newNumber){
+        this.surname = newSurname;
+        this.initials = newInitials;
+        this.number = newNumber;
+
+    }
 
 }
 

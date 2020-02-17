@@ -43,6 +43,7 @@ public interface Directory {
      * @param surname the surname of the entry
      * @return the extension number of the entry
      */
+
     String lookupExtension(String surname);
 
     /**

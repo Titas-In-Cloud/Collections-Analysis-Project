@@ -1,37 +1,48 @@
+import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class ArrayDirectory implements Directory {
 
-    Scanner user_input = new Scanner(System.in);
-
-    Entry[] array = new Entry[100000];
-    int numberOfArrayEntry = 0;
+    Entry[] array = new Entry[0];
 
     public void insertEntry(Entry entry) {
 
-        System.out.println("To create new entry in the directory, please input the following.");
-        System.out.print("Surname: ");
-        entry.surname = user_input.next();
-        System.out.print("Initials: ");
-        entry.initials = user_input.next();
-        System.out.print("Number: ");
-        entry.number = user_input.next();
+        // creates one size bigger temporary array
+        Entry[] temporaryArray = Arrays.copyOf(array,array.length + 1);
 
-        array[numberOfArrayEntry] = entry;
+        // puts a new entry to the array
+        temporaryArray[array.length] = entry;
 
-        /*
-        System.out.println("New entry was successfully created in the directory.");
-        System.out.println(array[numberOfArrayEntry].surname);
-        System.out.println(array[numberOfArrayEntry].initials);
-        System.out.println(array[numberOfArrayEntry].number);
-         */
-
-        numberOfArrayEntry++;
+        // puts all the values to directory array from temporary array
+        array = temporaryArray;
 
     }
 
     public void deleteEntryUsingName(String surname) {
+
+        // variable to check how many entries will need to be deleted out of array
+        int amountDeletedEntries = 0;
+
+        // loop which checks the amount of entries that will be deleted
+        for(int i = 0; i < array.length; i++){
+            if(array[i].getSurname().equals(surname)){
+                amountDeletedEntries++;
+            }
+        }
+
+        // creates a temporary array
+        Entry[] temporaryArray = new Entry[array.length - amountDeletedEntries];
+
+        // puts all the entries to a temporary array without required surname
+        for(int i = 0, k = 0; i < array.length; i++){
+            if(!array[i].getSurname().equals(surname)) {
+                temporaryArray[k] = array[i];
+                k++;
+            }
+        }
+
+        // puts all the values to directory array from temporary array
+        array = temporaryArray;
 
     }
 
@@ -51,13 +62,15 @@ public class ArrayDirectory implements Directory {
         return null;
     }
 
-    public ArrayDirectory() { }
-
     public static void main(String[] args){
 
+        int entryIndex;
+
         Directory directory = new ArrayDirectory();
+
         Entry newEntry = new Entry();
-        directory.insertEntry(newEntry);
+
+        directory.deleteEntryUsingName("James");
 
     }
 }
