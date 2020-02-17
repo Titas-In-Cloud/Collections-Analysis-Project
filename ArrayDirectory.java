@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,8 +25,8 @@ public class ArrayDirectory implements Directory {
         int amountDeletedEntries = 0;
 
         // loop which checks the amount of entries that will be deleted
-        for(int i = 0; i < array.length; i++){
-            if(array[i].getSurname().equals(surname)) {
+        for (Entry entry : array) {
+            if (entry.getSurname().equals(surname)) {
                 amountDeletedEntries++;
             }
         }
@@ -55,8 +56,8 @@ public class ArrayDirectory implements Directory {
         int intNumber = Integer.parseInt(number);
 
         // loop which checks the amount of entries that will be deleted
-        for(int i = 0; i < array.length; i++){
-            if(array[i].getNumber() != intNumber) {
+        for (Entry entry : array) {
+            if (entry.getNumber() != intNumber) {
                 amountDeletedEntries++;
             }
         }
@@ -80,21 +81,32 @@ public class ArrayDirectory implements Directory {
     public void updateExtensionUsingName(String surname, String newNumber) {
 
         // searches for the entry with required surname and updates it's extension
-        for(int i = 0; i < array.length; i++){
-            if(array[i].getSurname().equals(surname)){
+        for (Entry entry : array) {
+            if (entry.getSurname().equals(surname)) {
                 // converts string to intager value
                 int intNumber = Integer.parseInt(newNumber);
-                array[i].setNumber(intNumber);
+                entry.setNumber(intNumber);
             }
         }
 
     }
 
     public String lookupExtension(String surname) {
-        return null;
+
+        String extension = null;
+        
+        // searches for the required surname and saves it's extension
+        for (Entry entry : array) {
+            if (entry.getSurname().equals(surname)) {
+                extension = Integer.toString(entry.getNumber());
+            }
+        }
+        return extension;
     }
 
     public List<Entry> toArrayList() {
-        return null;
+
+        return new ArrayList<>(Arrays.asList(array));
+
     }
 }
