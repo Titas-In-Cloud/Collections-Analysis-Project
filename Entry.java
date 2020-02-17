@@ -17,6 +17,10 @@ public class Entry {
         return number;
     }
 
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
     public void setEntry(String newSurname, String newInitials, int newNumber){
         this.surname = newSurname;
         this.initials = newInitials;
