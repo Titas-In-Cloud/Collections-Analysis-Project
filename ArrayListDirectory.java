@@ -21,7 +21,6 @@ public class ArrayListDirectory implements Directory {
                 arrayList.remove(i);
             }
         }
-
     }
 
     public void deleteEntryUsingExtension(String number) {
@@ -43,7 +42,6 @@ public class ArrayListDirectory implements Directory {
                 arrayList.get(i).setNumber(Integer.parseInt(newNumber));
             }
         }
-
     }
 
     public String lookupExtension(String surname) {
