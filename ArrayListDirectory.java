@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ArrayListDirectory implements Directory {
 
-    ArrayList<Entry> arrayList = new ArrayList<Entry>();
+    ArrayList<Entry> arrayList = new ArrayList<>();
 
     public void insertEntry(Entry entry) {
 

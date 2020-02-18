@@ -6,14 +6,15 @@ public class MainClass {
         Directory hashMapDirectory = new HashMapDirectory();
 
         Input input = new Input();
+        Output output = new Output();
 
         Entry newEntry = new Entry();
 
         newEntry.setEntry("James", "J.K.", 55555);
         arrayListDirectory.insertEntry(newEntry);
 
-        input.writerDirectory(arrayListDirectory);
+        //input.userInput(arrayListDirectory);
         input.readerCSV(arrayListDirectory);
-
+        output.output(arrayListDirectory);
     }
 }

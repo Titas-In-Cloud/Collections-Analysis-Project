@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -7,7 +6,7 @@ import java.util.Scanner;
 
 public class Input extends MainClass{
 
-    public void writerDirectory(Directory directory) {
+    public void userInput(Directory directory) {
 
         String surname, initials;
         int number;
@@ -39,9 +38,7 @@ public class Input extends MainClass{
         String line = "";
         String variablesSplitBy = ",";
 
-
         try{
-
             br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null){
                 String[] entry = line.split(variablesSplitBy);
