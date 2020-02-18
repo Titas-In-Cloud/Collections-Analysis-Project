@@ -1,14 +1,15 @@
 public class MainClass {
     public static void main(String[] args) {
 
-        Directory aDirectory = new ArrayDirectory();
+        Directory arrayDirectory = new ArrayDirectory();
+        Directory arrayListDirectory = new ArrayListDirectory();
 
         Entry newEntry = new Entry();
 
         newEntry.setEntry("James", "J.K.", 55555);
-        aDirectory.insertEntry(newEntry);
+        arrayListDirectory.insertEntry(newEntry);
 
-        aDirectory.deleteEntryUsingName("James");
+        arrayListDirectory.deleteEntryUsingName("James");
 
     }
 }

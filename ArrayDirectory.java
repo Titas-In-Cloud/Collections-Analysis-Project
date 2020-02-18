@@ -106,6 +106,7 @@ public class ArrayDirectory implements Directory {
 
     public List<Entry> toArrayList() {
 
+        // creates and returns a list with all the objects of the array
         return new ArrayList<>(Arrays.asList(array));
 
     }

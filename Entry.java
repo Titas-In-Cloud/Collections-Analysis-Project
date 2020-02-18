@@ -25,7 +25,6 @@ public class Entry {
         this.surname = newSurname;
         this.initials = newInitials;
         this.number = newNumber;
-
     }
 
 }
