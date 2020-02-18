@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -61,6 +62,8 @@ public class HashMapDirectory implements Directory {
     }
 
     public List<Entry> toArrayList() {
-        return null;
+
+        // creates and returns a list with all the objects of the array list;
+        return new ArrayList<>(hashMapDirectory.values());
     }
 }
