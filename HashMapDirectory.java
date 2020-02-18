@@ -47,7 +47,17 @@ public class HashMapDirectory implements Directory {
     }
 
     public String lookupExtension(String surname) {
-        return null;
+
+        String numberExtension = null;
+
+        // searches for the required surname and saves it's extension
+        for(int i = 0; i < hashMapDirectory.size(); i++){
+            if(hashMapDirectory.get(i).getSurname().equals(surname)){
+                numberExtension = Integer.toString(hashMapDirectory.get(i).getNumber());
+            }
+        }
+
+        return numberExtension;
     }
 
     public List<Entry> toArrayList() {
