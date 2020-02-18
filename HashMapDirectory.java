@@ -30,7 +30,7 @@ public class HashMapDirectory implements Directory {
 
         // removes entry from the array list by required extension number
         for(int i = 0; i < hashMapDirectory.size(); i++){
-            if(hashMapDirectory.get(i).getNumber() == Integer.parseInt(number)){
+            if(hashMapDirectory.get(i).getNumber().equals(number)){
                 hashMapDirectory.remove(i);
             }
         }
@@ -42,7 +42,7 @@ public class HashMapDirectory implements Directory {
         for(int i = 0; i < hashMapDirectory.size(); i++){
             if(hashMapDirectory.get(i).getSurname().equals(surname)){
                 // changes extension to a new extension which was converted to integer
-                hashMapDirectory.get(i).setNumber(Integer.parseInt(newNumber));
+                hashMapDirectory.get(i).setNumber(newNumber);
             }
         }
     }
@@ -54,7 +54,7 @@ public class HashMapDirectory implements Directory {
         // searches for the required surname and saves it's extension
         for(int i = 0; i < hashMapDirectory.size(); i++){
             if(hashMapDirectory.get(i).getSurname().equals(surname)){
-                numberExtension = Integer.toString(hashMapDirectory.get(i).getNumber());
+                numberExtension = hashMapDirectory.get(i).getNumber();
             }
         }
 

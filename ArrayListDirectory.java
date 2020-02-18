@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -10,7 +9,6 @@ public class ArrayListDirectory implements Directory {
 
         // adds new entry to an array list
         arrayList.add(entry);
-
     }
 
     public void deleteEntryUsingName(String surname) {
@@ -27,7 +25,7 @@ public class ArrayListDirectory implements Directory {
 
         // removes entry from the array list by required extension number
         for(int i = 0; i < arrayList.size(); i++){
-            if(arrayList.get(i).getNumber() == Integer.parseInt(number)){
+            if(arrayList.get(i).getNumber().equals(number)){
                 arrayList.remove(i);
             }
         }
@@ -36,10 +34,10 @@ public class ArrayListDirectory implements Directory {
     public void updateExtensionUsingName(String surname, String newNumber) {
 
         // searches for the entry with required surname and updates it's extension
-        for(int i = 0; i < arrayList.size(); i++){
-            if(arrayList.get(i).getSurname().equals(surname)){
+        for (Entry entry : arrayList) {
+            if (entry.getSurname().equals(surname)) {
                 // changes extension to a new extension which was converted to integer
-                arrayList.get(i).setNumber(Integer.parseInt(newNumber));
+                entry.setNumber(newNumber);
             }
         }
     }
@@ -51,7 +49,7 @@ public class ArrayListDirectory implements Directory {
         // searches for the required surname and saves it's extension
         for (Entry entry : arrayList) {
             if (entry.getSurname().equals(surname)) {
-                numberExtension = Integer.toString(entry.getNumber());
+                numberExtension = entry.getNumber();
             }
         }
         return numberExtension;

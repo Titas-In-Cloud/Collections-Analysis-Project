@@ -8,8 +8,7 @@ public class Input extends MainClass{
 
     public void userInput(Directory directory) {
 
-        String surname, initials;
-        int number;
+        String surname, initials, number;
 
         Scanner user_input = new Scanner(System.in);
 
@@ -19,11 +18,11 @@ public class Input extends MainClass{
         System.out.print("Initials: ");
         initials = user_input.next();
         System.out.print("Extension number: ");
-        number = user_input.nextInt();
+        number = user_input.next();
 
-        while(String.valueOf(number).length() != 5){
+        while(number.length() != 5){
             System.out.print("Error! Please input number with 5 digits: ");
-            number = user_input.nextInt();
+            number = user_input.next();
         }
 
         Entry newEntry = new Entry();
@@ -44,6 +43,7 @@ public class Input extends MainClass{
                 String[] entry = line.split(variablesSplitBy);
 
                 Entry newEntry = new Entry();
+                newEntry.setEntry(entry[0], entry[1], entry[2]);
 
                 directory.insertEntry(newEntry);
             }

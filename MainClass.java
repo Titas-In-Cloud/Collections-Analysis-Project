@@ -10,7 +10,7 @@ public class MainClass {
 
         Entry newEntry = new Entry();
 
-        newEntry.setEntry("James", "J.K.", 55555);
+        newEntry.setEntry("James", "J.K.", "55555");
         arrayListDirectory.insertEntry(newEntry);
 
         //input.userInput(arrayListDirectory);

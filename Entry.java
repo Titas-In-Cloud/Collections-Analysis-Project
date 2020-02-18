@@ -3,7 +3,7 @@ public class Entry {
 
     private String surname;
     private String initials;
-    private int number;
+    private String number;
 
     public String getSurname() {
         return surname;
@@ -13,15 +13,15 @@ public class Entry {
         return initials;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
-    public void setEntry(String newSurname, String newInitials, int newNumber){
+    public void setEntry(String newSurname, String newInitials, String newNumber){
         this.surname = newSurname;
         this.initials = newInitials;
         this.number = newNumber;
