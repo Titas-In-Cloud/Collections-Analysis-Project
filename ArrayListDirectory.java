@@ -42,7 +42,15 @@ public class ArrayListDirectory implements Directory {
     }
 
     public String lookupExtension(String surname) {
-        return null;
+
+        String numberExtension = null;
+
+        for(int i = 0; i < arrayList.size(); i++){
+            if(arrayList.get(i).getSurname().equals(surname)){
+                numberExtension = surname;
+            }
+        }
+        return numberExtension;
     }
 
     public List<Entry> toArrayList() {

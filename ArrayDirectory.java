@@ -93,15 +93,15 @@ public class ArrayDirectory implements Directory {
 
     public String lookupExtension(String surname) {
 
-        String extension = null;
+        String numberExtension = null;
         
         // searches for the required surname and saves it's extension
         for (Entry entry : array) {
             if (entry.getSurname().equals(surname)) {
-                extension = Integer.toString(entry.getNumber());
+                numberExtension = Integer.toString(entry.getNumber());
             }
         }
-        return extension;
+        return numberExtension;
     }
 
     public List<Entry> toArrayList() {
