@@ -1,8 +1,9 @@
+import java.io.*;
 import java.util.List;
 
 public class Output {
 
-    public void output(Directory directory){
+    public void outputInTable(Directory directory){
 
         String leftAlignFormat = "| %-14s | %-9s | %-9s |%n";
 
@@ -26,4 +27,31 @@ public class Output {
         System.out.format("+----------------+-----------+-----------+%n");
     }
 
+    public void writerCSV(Directory directory) throws IOException {
+
+        BufferedWriter br = new BufferedWriter((new FileWriter("directoryEntries.csv")));
+        StringBuilder sb = new StringBuilder();
+
+        String surname, initials, number;
+
+        List<Entry> list;
+        list = directory.toArrayList();
+
+        for (Entry entry : list) {
+            surname = entry.getSurname();
+            initials = entry.getInitials();
+            number = entry.getNumber();
+
+            sb.append(surname);
+            sb.append(",");
+            sb.append(initials);
+            sb.append(",");
+            sb.append(number);
+            sb.append("\n");
+        }
+
+        br.write(sb.toString());
+        br.close();
+
+    }
 }

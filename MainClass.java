@@ -1,5 +1,7 @@
+import java.io.IOException;
+
 public class MainClass {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Directory arrayDirectory = new ArrayDirectory();
         Directory arrayListDirectory = new ArrayListDirectory();
@@ -13,8 +15,9 @@ public class MainClass {
         newEntry.setEntry("James", "J.K.", "55555");
         arrayListDirectory.insertEntry(newEntry);
 
-        //input.userInput(arrayListDirectory);
         input.readerCSV(arrayListDirectory);
-        output.output(arrayListDirectory);
+        output.outputInTable(arrayListDirectory);
+        output.writerCSV(arrayListDirectory);
+
     }
 }
