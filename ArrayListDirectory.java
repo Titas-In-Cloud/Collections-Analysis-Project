@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -54,6 +55,7 @@ public class ArrayListDirectory implements Directory {
     }
 
     public List<Entry> toArrayList() {
-        return null;
+
+        return new ArrayList<>(arrayList);
     }
 }
