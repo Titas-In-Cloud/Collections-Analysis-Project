@@ -52,7 +52,7 @@ public class ArrayDirectory implements Directory {
         // variable to check how many entries will need to be deleted out of array
         int amountDeletedEntries = 0;
 
-        // converts string to intager value
+        // converts string to integer value
         int intNumber = Integer.parseInt(number);
 
         // loop which checks the amount of entries that will be deleted
@@ -65,7 +65,7 @@ public class ArrayDirectory implements Directory {
         // creates a temporary array
         Entry[] temporaryArray = new Entry[array.length - amountDeletedEntries];
 
-        // puts all the entries to a temporary array without required surname
+        // puts all the entries to a temporary array without required extension number
         for(int i = 0, k = 0; i < array.length; i++){
             if(array[i].getNumber() != intNumber) {
                 temporaryArray[k] = array[i];
@@ -83,7 +83,7 @@ public class ArrayDirectory implements Directory {
         // searches for the entry with required surname and updates it's extension
         for (Entry entry : array) {
             if (entry.getSurname().equals(surname)) {
-                // converts string to intager value
+                // converts string to integer value
                 int intNumber = Integer.parseInt(newNumber);
                 entry.setNumber(intNumber);
             }
