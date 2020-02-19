@@ -10,13 +10,13 @@ public class MainClass {
         Input input = new Input();
         Output output = new Output();
 
-        Entry newEntry = new Entry();
+        // calls method which checks if user wants to add any entries to directory manually
+        input.userInputCheck(arrayDirectory, arrayListDirectory, hashMapDirectory);
 
-        newEntry.setEntry("James", "J.K.", "55555");
-        arrayListDirectory.insertEntry(newEntry);
+        // calls a method which adds all entries from csv file to directories
+        input.readerCSV(arrayDirectory, arrayListDirectory, hashMapDirectory);
 
-        input.readerCSV(arrayListDirectory);
-        output.outputInTable(arrayListDirectory);
+        output.outputInTable(hashMapDirectory);
         output.writerCSV(arrayListDirectory);
 
     }
