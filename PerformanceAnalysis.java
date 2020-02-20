@@ -1,14 +1,22 @@
+import java.io.IOException;
+import java.util.List;
+
 public class PerformanceAnalysis {
 
-    public void directoryPerformance(String type) {
+    public void directoryPerformance(String directoryType) throws IOException {
 
         double executionTime;
-        double totalExecutionTimeEntry = 0, totalExecutionTimeLookup = 0, totalExecutionTimeDeletionSurname = 0, totalExecutionTimeDeletionNumber = 0;
-        double averageExecutionTimeEntry, averageExecutionTimeLookup, averageExecutionTimeDeletionSurname, averageExecutionTimeDeletionNumber;
-        double worstExecutionTimeEntry = 0, bestExecutionTimeEntry = 999999999;
-        double worstExecutionTimeLookup = 0, bestExecutionTimeLookup = 999999999;
-        double worstExecutionTimeDeletionSurname = 0, bestExecutionTimeDeletionSurname = 999999999;
-        double worstExecutionTimeDeletionNumber = 0, bestExecutionTimeDeletionNumber = 999999999;
+
+        // 3 arrays to store execution times of methods:
+        // index 0 entry average/best/worst execution times
+        // index 1 lookup average/best/worst execution times
+        // index 2 deletion by surname average/best/worst execution times
+        // index 3 deletion by number average/best/worst execution times
+        double[] averageExecutionTime = new double[4];
+        double[] bestExecutionTime = {999999999, 999999999, 999999999, 999999999};
+        double[] worstExecutionTime = {0, 0, 0, 0};
+        double totalExecutionTimeEntry = 0, totalExecutionTimeLookup = 0;
+        double totalExecutionTimeDeletionSurname = 0, totalExecutionTimeDeletionNumber = 0;
 
         Directory newDirectory = new ArrayDirectory();
 
@@ -16,10 +24,12 @@ public class PerformanceAnalysis {
         Input input = new Input();
         Output output = new Output();
 
+        String surname, number;
+
         for (int i = 0; i < 10000; i++) {
-            if(type.equals("Array")) { newDirectory = new ArrayDirectory(); }
-            if(type.equals("ArrayList")) { newDirectory = new ArrayListDirectory(); }
-            if(type.equals("HashMap")) { newDirectory = new HashMapDirectory(); }
+            if(directoryType.equals("Array")) { newDirectory = new ArrayDirectory(); }
+            if(directoryType.equals("ArrayList")) { newDirectory = new ArrayListDirectory(); }
+            if(directoryType.equals("HashMap")) { newDirectory = new HashMapDirectory(); }
 
             stopWatch.start();
             input.readerCSV(newDirectory);
@@ -29,74 +39,66 @@ public class PerformanceAnalysis {
             stopWatch.reset();
 
             totalExecutionTimeEntry += executionTime;
-            if(executionTime <= bestExecutionTimeEntry) { bestExecutionTimeEntry = executionTime; }
-            if(executionTime >= worstExecutionTimeEntry) { worstExecutionTimeEntry = executionTime; }
+            if(executionTime <= bestExecutionTime[0]) { bestExecutionTime[0] = executionTime; }
+            if(executionTime >= worstExecutionTime[0]) { worstExecutionTime[0] = executionTime; }
 
-            // create a method which will find variable in the middle of directory
+            // finds an object's surname in the middle of the directory
+            surname = directoryMiddleSurnameFinder(newDirectory);
 
             stopWatch.start();
-            newDirectory.lookupExtension("Third");
+            newDirectory.lookupExtension(surname);
             stopWatch.stop();
 
             executionTime = stopWatch.getElapsedTime();
             stopWatch.reset();
 
             totalExecutionTimeLookup += executionTime;
-            if(executionTime <= bestExecutionTimeLookup) { bestExecutionTimeLookup = executionTime; }
-            if(executionTime >= worstExecutionTimeLookup) { worstExecutionTimeLookup = executionTime; }
-
-            // create a method which will find variable in the middle of directory
+            if(executionTime <= bestExecutionTime[1]) { bestExecutionTime[1] = executionTime; }
+            if(executionTime >= worstExecutionTime[1]) { worstExecutionTime[1] = executionTime; }
 
             stopWatch.start();
-            newDirectory.deleteEntryUsingName("Third");
+            newDirectory.deleteEntryUsingName(surname);
             stopWatch.stop();
 
             executionTime = stopWatch.getElapsedTime();
             stopWatch.reset();
 
             totalExecutionTimeDeletionSurname += executionTime;
-            if(executionTime <= bestExecutionTimeDeletionSurname) { bestExecutionTimeDeletionSurname = executionTime; }
-            if(executionTime >= worstExecutionTimeDeletionSurname) { worstExecutionTimeDeletionSurname = executionTime; }
+            if(executionTime <= bestExecutionTime[2]) { bestExecutionTime[2] = executionTime; }
+            if(executionTime >= worstExecutionTime[2]) { worstExecutionTime[2] = executionTime; }
 
-            // create a method which will find variable in the middle of directory
+            // finds an object's number in the middle of the directory
+            number = directoryMiddleNumberFinder(newDirectory);
 
             stopWatch.start();
-            newDirectory.deleteEntryUsingExtension("22222");
+            newDirectory.deleteEntryUsingExtension(number);
             stopWatch.stop();
 
             executionTime = stopWatch.getElapsedTime();
             stopWatch.reset();
 
             totalExecutionTimeDeletionNumber += executionTime;
-            if(executionTime <= bestExecutionTimeDeletionNumber) { bestExecutionTimeDeletionNumber = executionTime; }
-            if(executionTime >= worstExecutionTimeDeletionNumber) { worstExecutionTimeDeletionNumber = executionTime; }
+            if(executionTime <= bestExecutionTime[3]) { bestExecutionTime[3] = executionTime; }
+            if(executionTime >= worstExecutionTime[3]) { worstExecutionTime[3] = executionTime; }
         }
 
-        averageExecutionTimeEntry = totalExecutionTimeEntry / 10000;
-        averageExecutionTimeLookup = totalExecutionTimeLookup / 10000;
-        averageExecutionTimeDeletionSurname = totalExecutionTimeDeletionSurname / 10000;
-        averageExecutionTimeDeletionNumber = totalExecutionTimeDeletionNumber / 10000;
+        averageExecutionTime[0] = totalExecutionTimeEntry / 10000;
+        averageExecutionTime[1] = totalExecutionTimeLookup / 10000;
+        averageExecutionTime[2] = totalExecutionTimeDeletionSurname / 10000;
+        averageExecutionTime[3] = totalExecutionTimeDeletionNumber / 10000;
 
-        if(type.equals("Array")) { System.out.println("Execution times of an Array directory."); }
-        if(type.equals("ArrayList")) { System.out.println("Execution times of an Array List directory."); }
-        if(type.equals("HashMap")) { System.out.println("Execution times of an HashMap directory."); }
+        output.performanceAnalysisTxtFile(directoryType, averageExecutionTime, bestExecutionTime, worstExecutionTime);
+    }
 
-        System.out.println("Average time of entry: " + averageExecutionTimeEntry +
-                ", best: " + bestExecutionTimeEntry +
-                ", worst: " + worstExecutionTimeEntry);
+    public String directoryMiddleSurnameFinder(Directory directory){
 
-        System.out.println("Average time of lookup by surname: " + averageExecutionTimeLookup +
-                ", best: " + bestExecutionTimeLookup +
-                ", worst: " + worstExecutionTimeLookup);
+        List<Entry> list = directory.toArrayList();
+        return list.get(list.size()/2).getSurname();
+    }
 
-        System.out.println("Average time of deletion by surname: " + averageExecutionTimeDeletionSurname +
-                ", best: " + bestExecutionTimeDeletionSurname +
-                ", worst: " + worstExecutionTimeDeletionSurname);
+    public String directoryMiddleNumberFinder(Directory directory){
 
-        System.out.println("Average time of deletion by number: " + averageExecutionTimeDeletionNumber +
-                ", best: " + bestExecutionTimeDeletionNumber +
-                ", worst: " + worstExecutionTimeDeletionNumber);
-
-        System.out.println("");
+        List<Entry> list = directory.toArrayList();
+        return list.get(list.size()/2).getNumber();
     }
 }

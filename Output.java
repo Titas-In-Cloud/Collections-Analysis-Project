@@ -9,8 +9,7 @@ public class Output {
 
         String surname, initials, number;
 
-        List<Entry> list;
-        list = directory.toArrayList();
+        List<Entry> list = directory.toArrayList();
 
         System.out.format("+----------------+-----------+-----------+%n");
         System.out.format("| Surname        | Initials  | Extension |%n");
@@ -29,7 +28,7 @@ public class Output {
 
     public void writerCSV(Directory directory) throws IOException {
 
-        BufferedWriter br = new BufferedWriter((new FileWriter("directoryEntries.csv")));
+        BufferedWriter br = new BufferedWriter((new FileWriter("test_directory.csv")));
         StringBuilder sb = new StringBuilder();
 
         String surname, initials, number;
@@ -52,6 +51,88 @@ public class Output {
 
         br.write(sb.toString());
         br.close();
+
+    }
+
+    public void performanceAnalysisTxtFile(String directoryType, double[] averageExecutionTime,
+                                           double[] bestExecutionTime, double[] worstExecutionTime) throws IOException{
+
+        if(directoryType.equals("Array")){
+            try {
+                FileWriter writer = new FileWriter("array_directory_analysis.txt");
+                writer.write("Array Directory Execution Times Analysis \n \n");
+                writer.write("Entry method:\n");
+                writer.write("Average time: " + averageExecutionTime[0] + "\n");
+                writer.write("Worst time: " + worstExecutionTime[0] + "\n");
+                writer.write("Best time: " + bestExecutionTime[0] + "\n");
+                writer.write("Lookup by surname method:\n");
+                writer.write("Average time: " + averageExecutionTime[1] + "\n");
+                writer.write("Worst time: " + worstExecutionTime[1] + "\n");
+                writer.write("Best time: " + bestExecutionTime[1] + "\n");
+                writer.write("Deletion by surname method:\n");
+                writer.write("Average time: " + averageExecutionTime[2] + "\n");
+                writer.write("Worst time: " + worstExecutionTime[2] + "\n");
+                writer.write("Best time: " + bestExecutionTime[2] + "\n");
+                writer.write("Deletion by number method:\n");
+                writer.write("Average time: " + averageExecutionTime[3] + "\n");
+                writer.write("Worst time: " + worstExecutionTime[3] + "\n");
+                writer.write("Best time: " + bestExecutionTime[3] + "\n");
+                writer.close();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+        if(directoryType.equals("ArrayList")){
+            try {
+                FileWriter writer = new FileWriter("array_list_directory_analysis.txt");
+                writer.write("Array List Directory Execution Times Analysis \n \n");
+                writer.write("Entry method:\n");
+                writer.write("Average time: " + averageExecutionTime[0] + "\n");
+                writer.write("Worst time: " + worstExecutionTime[0] + "\n");
+                writer.write("Best time: " + bestExecutionTime[0] + "\n");
+                writer.write("Lookup by surname method:\n");
+                writer.write("Average time: " + averageExecutionTime[1] + "\n");
+                writer.write("Worst time: " + worstExecutionTime[1] + "\n");
+                writer.write("Best time: " + bestExecutionTime[1] + "\n");
+                writer.write("Deletion by surname method:\n");
+                writer.write("Average time: " + averageExecutionTime[2] + "\n");
+                writer.write("Worst time: " + worstExecutionTime[2] + "\n");
+                writer.write("Best time: " + bestExecutionTime[2] + "\n");
+                writer.write("Deletion by number method:\n");
+                writer.write("Average time: " + averageExecutionTime[3] + "\n");
+                writer.write("Worst time: " + worstExecutionTime[3] + "\n");
+                writer.write("Best time: " + bestExecutionTime[3] + "\n");
+                writer.close();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+        if(directoryType.equals("HashMap")){
+            try {
+                FileWriter writer = new FileWriter("hash_map_directory_analysis.txt");
+                writer.write("HashMap Directory Execution Times Analysis \n \n");
+                writer.write("Entry method:\n");
+                writer.write("Average time: " + averageExecutionTime[0] + "\n");
+                writer.write("Worst time: " + worstExecutionTime[0] + "\n");
+                writer.write("Best time: " + bestExecutionTime[0] + "\n");
+                writer.write("Lookup by surname method:\n");
+                writer.write("Average time: " + averageExecutionTime[1] + "\n");
+                writer.write("Worst time: " + worstExecutionTime[1] + "\n");
+                writer.write("Best time: " + bestExecutionTime[1] + "\n");
+                writer.write("Deletion by surname method:\n");
+                writer.write("Average time: " + averageExecutionTime[2] + "\n");
+                writer.write("Worst time: " + worstExecutionTime[2] + "\n");
+                writer.write("Best time: " + bestExecutionTime[2] + "\n");
+                writer.write("Deletion by number method:\n");
+                writer.write("Average time: " + averageExecutionTime[3] + "\n");
+                writer.write("Worst time: " + worstExecutionTime[3] + "\n");
+                writer.write("Best time: " + bestExecutionTime[3] + "\n");
+                writer.close();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+
+        }
 
     }
 }
