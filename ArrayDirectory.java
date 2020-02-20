@@ -54,7 +54,7 @@ public class ArrayDirectory implements Directory {
 
         // loop which checks the amount of entries that will be deleted
         for (Entry entry : array) {
-            if (!entry.getNumber().equals(number)) {
+            if (entry.getNumber().equals(number)) {
                 amountDeletedEntries++;
             }
         }
@@ -87,16 +87,14 @@ public class ArrayDirectory implements Directory {
     }
 
     public String lookupExtension(String surname) {
-
-        String numberExtension = null;
         
         // searches for the required surname and saves it's extension
         for (Entry entry : array) {
             if (entry.getSurname().equals(surname)) {
-                numberExtension = entry.getNumber();
+                return entry.getNumber();
             }
         }
-        return numberExtension;
+        return surname;
     }
 
     public List<Entry> toArrayList() {
