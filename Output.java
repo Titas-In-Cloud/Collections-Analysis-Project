@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.*;
 import java.util.List;
 
@@ -57,9 +58,17 @@ public class Output {
     public void performanceAnalysisTxtFile(String directoryType, double[] averageExecutionTime,
                                            double[] bestExecutionTime, double[] worstExecutionTime) throws IOException{
 
+        JFileChooser directoryChooser = new JFileChooser();
+
+        directoryChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        directoryChooser.setDialogTitle("Specify " + directoryType + " analysis.txt Save Folder");
+        directoryChooser.showSaveDialog(null);
+
+        String savePath = directoryChooser.getSelectedFile().getAbsolutePath();
+
         if(directoryType.equals("Array")){
             try {
-                FileWriter writer = new FileWriter("array_directory_analysis.txt");
+                PrintWriter writer = new PrintWriter(new File(savePath + "\\array_directory_analysis.txt"));
                 writer.write("Array Directory Execution Times Analysis \n \n");
                 writer.write("Entry method:\n");
                 writer.write("Average time: " + Math.round(averageExecutionTime[0])+ "ns\n");
@@ -84,7 +93,7 @@ public class Output {
         }
         if(directoryType.equals("ArrayList")){
             try {
-                FileWriter writer = new FileWriter("array_list_directory_analysis.txt");
+                PrintWriter writer = new PrintWriter(new File(savePath + "\\array_list_directory_analysis.txt"));
                 writer.write("Array List Directory Execution Times Analysis \n \n");
                 writer.write("Entry method:\n");
                 writer.write("Average time: " + Math.round(averageExecutionTime[0])+ "ns\n");
@@ -109,7 +118,7 @@ public class Output {
         }
         if(directoryType.equals("HashMap")){
             try {
-                FileWriter writer = new FileWriter("hash_map_directory_analysis.txt");
+                PrintWriter writer = new PrintWriter(new File(savePath + "\\hash_map_directory_analysis.txt"));
                 writer.write("HashMap Directory Execution Times Analysis \n \n");
                 writer.write("Entry method:\n");
                 writer.write("Average time: " + Math.round(averageExecutionTime[0])+ "ns\n");
