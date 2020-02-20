@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -138,7 +139,13 @@ public class Input extends MainClass{
 
         double executionTime;
 
-        String csvFile = "test_data.csv";
+        JFileChooser fileChooser = new JFileChooser();
+
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setDialogTitle("Select CSV File To Read");
+        fileChooser.showSaveDialog(null);
+
+        String csvFile = fileChooser.getSelectedFile().getName();
         BufferedReader br = null;
         String line = "";
         String variablesSplitBy = ",";
@@ -157,13 +164,11 @@ public class Input extends MainClass{
                     stopWatch.stop();
 
                     executionTime = stopWatch.getElapsedTime();
-                    if(executionTime != 0){
-                        executionTimeList.add(executionTime);
-                    }
+                    executionTimeList.add(executionTime);
+
                     stopWatch.reset();
 
                 } else directory.insertEntry(newEntry);
-
             }
 
         } catch (IOException e){
