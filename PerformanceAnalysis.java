@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PerformanceAnalysis {
@@ -6,6 +7,7 @@ public class PerformanceAnalysis {
     public void directoryPerformance(String directoryType) throws IOException {
 
         double executionTime;
+        ArrayList<Double> executionTimeList = new ArrayList<>();
 
         // 3 arrays to store execution times of methods:
         // index 0 entry average/best/worst execution times
@@ -31,16 +33,17 @@ public class PerformanceAnalysis {
             if(directoryType.equals("ArrayList")) { newDirectory = new ArrayListDirectory(); }
             if(directoryType.equals("HashMap")) { newDirectory = new HashMapDirectory(); }
 
-            stopWatch.start();
-            input.readerCSV(newDirectory);
-            stopWatch.stop();
+            executionTimeList = input.readerCSV(newDirectory, true);
 
-            executionTime = stopWatch.getElapsedTime();
-            stopWatch.reset();
-
-            totalExecutionTimeEntry += executionTime;
-            if(executionTime <= bestExecutionTime[0]) { bestExecutionTime[0] = executionTime; }
-            if(executionTime >= worstExecutionTime[0]) { worstExecutionTime[0] = executionTime; }
+            for (Double aDouble : executionTimeList) {
+                totalExecutionTimeEntry += aDouble;
+                if (aDouble <= bestExecutionTime[0]) {
+                    bestExecutionTime[0] = aDouble;
+                }
+                if (aDouble >= worstExecutionTime[0]) {
+                    worstExecutionTime[0] = aDouble;
+                }
+            }
 
             // finds an object's surname in the middle of the directory
             surname = directoryMiddleSurnameFinder(newDirectory);
@@ -82,7 +85,7 @@ public class PerformanceAnalysis {
             if(executionTime >= worstExecutionTime[3]) { worstExecutionTime[3] = executionTime; }
         }
 
-        averageExecutionTime[0] = totalExecutionTimeEntry / 10000;
+        averageExecutionTime[0] = totalExecutionTimeEntry / 10000 / executionTimeList.size();
         averageExecutionTime[1] = totalExecutionTimeLookup / 10000;
         averageExecutionTime[2] = totalExecutionTimeDeletionSurname / 10000;
         averageExecutionTime[3] = totalExecutionTimeDeletionNumber / 10000;

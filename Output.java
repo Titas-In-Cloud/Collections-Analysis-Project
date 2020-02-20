@@ -140,8 +140,6 @@ public class Output {
             } catch (IOException e){
                 e.printStackTrace();
             }
-
         }
-
     }
 }

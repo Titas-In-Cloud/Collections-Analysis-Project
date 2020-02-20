@@ -1,18 +1,46 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Input extends MainClass{
 
     Scanner userInput = new Scanner(System.in);
 
+    /*public void userMenu(){
+
+        String Answer;
+
+        System.out.println("What would you like to do? " +
+                "Input 'menu' to get a list of available actions.");
+        Answer = userInput.next();
+
+        while(Answer.equals("End") || Answer.equals("end")){
+
+            if(Answer == "Menu" || Answer == "menu"){
+                System.out.println("Action menu:");
+                System.out.println(" - menu - returns a menu of available actions.");
+                System.out.println(" - input - ");
+                System.out.println(" - delete by name - ");
+                System.out.println(" - delete by extension - ");
+                System.out.println(" - update extension - ");
+                System.out.println(" - lookup extension - ");
+                System.out.println(" - - ");
+                System.out.println(" - csv - ");
+                System.out.println(" - table - ");
+                System.out.println(" - analysis - ");
+            }
+            Answer = userInput.next();
+        }
+    }
+     */
+
     public Directory whichDirectory(){
 
         String directoryName;
 
-        System.out.print("To which directory you would like to insert your entries? ");
+        System.out.print("Which directory you would like to use? ");
         directoryName = userInput.next();
 
         while (!directoryName.equals("Array") && !directoryName.equals("array")
@@ -102,13 +130,18 @@ public class Input extends MainClass{
         directory.insertEntry(newEntry);
     }
 
-    public void readerCSV(Directory directory) {
+    public ArrayList<Double> readerCSV(Directory directory, boolean countTime) {
+
+        StopWatch stopWatch = new StopWatch();
+
+        ArrayList<Double> executionTimeList = new ArrayList<>();
+
+        double executionTime;
+
         String csvFile = "test_data.csv";
         BufferedReader br = null;
         String line = "";
         String variablesSplitBy = ",";
-
-        StopWatch stopWatch = new StopWatch();
 
         try{
             br = new BufferedReader(new FileReader(csvFile));
@@ -118,7 +151,19 @@ public class Input extends MainClass{
                 Entry newEntry = new Entry();
                 newEntry.setEntry(entry[0], entry[1], entry[2]);
 
-                directory.insertEntry(newEntry);
+                if(countTime){
+                    stopWatch.start();
+                    directory.insertEntry(newEntry);
+                    stopWatch.stop();
+
+                    executionTime = stopWatch.getElapsedTime();
+                    if(executionTime != 0){
+                        executionTimeList.add(executionTime);
+                    }
+                    stopWatch.reset();
+
+                } else directory.insertEntry(newEntry);
+
             }
 
         } catch (IOException e){
@@ -132,5 +177,6 @@ public class Input extends MainClass{
                 }
             }
         }
+        return executionTimeList;
     }
 }
