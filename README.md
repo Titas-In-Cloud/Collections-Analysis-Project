@@ -25,6 +25,7 @@ the program. List of available actions:
 + **input** - starts manual input of entries to directory.
 + **deleteName** - deletes object by it's surname.
 + **deleteNumber** - deletes object by it's extension number.
++ **updateNumber** - updates extension number by object's surname.
 + **csvIn** - reads CSV file and puts all the entries to the directory.
 + **csvOut** - puts all the directory entries to CSV file and saves it.
 + **table** - returns a table with entries of directory in ASCII format.

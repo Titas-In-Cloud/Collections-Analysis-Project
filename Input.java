@@ -19,6 +19,7 @@ public class Input {
 
         String answer;
         String answerToObject;
+        String newExtensionNumber;
         String directoryName = null;
         Directory directory = null;
         boolean firstCommand = true;
@@ -42,6 +43,7 @@ public class Input {
                 System.out.println(" - input -        starts manual input of entries to directory.");
                 System.out.println(" - deleteName -   deletes object by it's surname.");
                 System.out.println(" - deleteNumber - deletes object by it's extension number.");
+                System.out.println(" - updateNumber - updates extension number by object's surname.");
                 System.out.println(" - csvIn -        reads CSV file and puts all the entries to the directory.");
                 System.out.println(" - csvOut -       puts all the directory entries to CSV file and saves it.");
                 System.out.println(" - table -        returns a table with entries of directory in ASCII format.");
@@ -99,6 +101,30 @@ public class Input {
                     System.out.println("-Object was successfully deleted.");
                 } else System.out.println("-Error! There is no object with " +
                         answerToObject + " extension number in the directory");
+            }
+            else if((answer.equals("updatenumber") || answer.equals("updateNumber")) && directory != null){
+                System.out.print("-Which object's extension number you would like to update? " +
+                        "Please specify it's surname: ");
+                answerToObject = userInput.next();
+                boolean containsSurname = false;
+                List<Entry> list = directory.toArrayList();
+                for (Entry entry : list) {
+                    if (entry.getSurname().equals(answerToObject)) {
+                        containsSurname = true;
+                        break;
+                    }
+                }
+                if(containsSurname){
+                    System.out.print("-Input new extension number: ");
+                    newExtensionNumber = userInput.next();
+                    while(!newExtensionNumber.matches("\\d+") || newExtensionNumber.length() != 5) {
+                        System.out.print("-Error! Please input a number with 5 digits: ");
+                        newExtensionNumber = userInput.next();
+                    }
+                    directory.updateExtensionUsingName(answerToObject, newExtensionNumber);
+                    System.out.println("-Object was successfully updated.");
+                } else System.out.println("-Error! There is no object with " +
+                        answerToObject + " surname in the directory");
             }
             else if((answer.equals("csvin") || answer.equals("csvIn")) && directory != null){
                 readerCSV(directory, false);
