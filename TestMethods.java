@@ -13,7 +13,8 @@ public class TestMethods {
 
     // tests if methods of directories are working without any bugs.
     // before using this test method please make sure that test_data_methods.csv file is used to
-    // input new entries to directories, otherwise the testing will be incorrect.
+    // input new entries to directories, otherwise the testing will be incorrect. You can change
+    // input csv file in Input.java readerCSV method.
     public void testMethods(Directory directory) {
 
         Input input = new Input();

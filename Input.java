@@ -21,8 +21,9 @@ public class Input {
         Directory directory = null;
         boolean firstCommand = true;
 
-        System.out.print("-What would you like to do? " +
+        System.out.println("-What would you like to do? " +
                 "Input 'menu' to get a list of available actions. ");
+        System.out.print("Action: ");
         answer = userInput.next();
 
         while(true) {
@@ -200,7 +201,7 @@ public class Input {
         String line;
 
         try{
-            br = new BufferedReader(new FileReader("test_data_methods.csv"));
+            br = new BufferedReader(new FileReader("test_data.csv"));
             // reads each string line in csv file and splits it to 3 variables which are put to directory
             while ((line = br.readLine()) != null){
                 String[] entry = line.split(variablesSplitBy);
