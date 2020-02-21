@@ -1,17 +1,17 @@
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Input extends MainClass{
+public class Input {
 
     Scanner userInput = new Scanner(System.in);
 
     Output output = new Output();
 
     PerformanceAnalysis performanceAnalysis = new PerformanceAnalysis();
+    TestMethods testMethods = new TestMethods();
 
     public void userMenu() throws IOException {
 
@@ -40,6 +40,7 @@ public class Input extends MainClass{
                 System.out.println(" - csvOut -     puts all the directory entries to CSV file.");
                 System.out.println(" - table -      returns a table with entries in ASCII format.");
                 System.out.println(" - analysis -   runs analysis of Array, Array List and HashMap directories methods.");
+                System.out.println(" - test -       runs tests of Array, Array List and HashMap methods.");
                 System.out.println(" - exit -       ends the program.");
             }
             else if(answer.equals("exit") || answer.equals("Exit")){
@@ -52,7 +53,10 @@ public class Input extends MainClass{
                 performanceAnalysis.directoryPerformance("HashMap");
                 System.out.println("-Analysis was done successfully and " +
                         "txt files were created with method running times.");
-        }
+            }
+            else if(answer.equals("test") || answer.equals("Test")){
+                testMethods.runTestMethods();
+            }
             else if((answer.equals("input") || answer.equals("Input")) && directory != null) {
                 userInputCheck(directory);
             }
@@ -188,7 +192,7 @@ public class Input extends MainClass{
         String line;
 
         try{
-            br = new BufferedReader(new FileReader("test_data.csv"));
+            br = new BufferedReader(new FileReader("test_data_methods.csv"));
             while ((line = br.readLine()) != null){
                 String[] entry = line.split(variablesSplitBy);
 

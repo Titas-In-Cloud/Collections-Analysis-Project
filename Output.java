@@ -37,7 +37,7 @@ public class Output {
 
         String savePath = directoryChooser.getSelectedFile().getAbsolutePath();
 
-        BufferedWriter br = new BufferedWriter(new FileWriter(savePath + "\\directory.csv"));
+        BufferedWriter br = new BufferedWriter(new FileWriter(savePath + "\\directory_entries.csv"));
         StringBuilder sb = new StringBuilder();
 
         String surname, initials, number;
