@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Input {
@@ -17,6 +18,7 @@ public class Input {
     public void userMenu() throws IOException {
 
         String answer;
+        String answerToObject;
         String directoryName = null;
         Directory directory = null;
         boolean firstCommand = true;
@@ -38,6 +40,7 @@ public class Input {
                 System.out.println("Action menu:");
                 System.out.println(" - directory -  sets which directory to initialize for usage.");
                 System.out.println(" - input -      starts manual input of entries to directory.");
+                System.out.println(" - deleteName - deletes object by it's surname");
                 System.out.println(" - csvIn -      reads CSV file and puts all the entries to the directory.");
                 System.out.println(" - csvOut -     puts all the directory entries to CSV file and saves it.");
                 System.out.println(" - table -      returns a table with entries of directory in ASCII format.");
@@ -61,6 +64,22 @@ public class Input {
             }
             else if((answer.equals("input") || answer.equals("Input")) && directory != null) {
                 userInputCheck(directory);
+            }
+            else if((answer.equals("deletename") || answer.equals("deleteName")) && directory != null){
+                System.out.print("-What object you would like to delete? Please specify it's surname: ");
+                answerToObject = userInput.next();
+                boolean containsSurname = false;
+                List<Entry> list = directory.toArrayList();
+                for (Entry entry : list) {
+                    if (entry.getSurname().equals(answerToObject)) {
+                        containsSurname = true;
+                        break;
+                    }
+                }
+                if(containsSurname){
+                    directory.deleteEntryUsingName(answerToObject);
+                } else System.out.println("-Error! There is no object with " +
+                        answerToObject + " surname in the directory");
             }
             else if((answer.equals("csvin") || answer.equals("csvIn")) && directory != null){
                 readerCSV(directory, false);
