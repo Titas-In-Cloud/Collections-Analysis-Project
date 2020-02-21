@@ -17,6 +17,7 @@ public class HashMapDirectory implements Directory {
 
     public void deleteEntryUsingName(String surname) {
 
+        // removes entries from both hashmaps by required surname
         hashMapDirectoryNumber.remove(hashMapDirectorySurname.get(surname).getNumber());
         hashMapDirectorySurname.remove(surname);
 
@@ -24,6 +25,7 @@ public class HashMapDirectory implements Directory {
 
     public void deleteEntryUsingExtension(String number) {
 
+        // removes entries from both hashmaps by required extension number
         hashMapDirectorySurname.remove(hashMapDirectoryNumber.get(number).getSurname());
         hashMapDirectoryNumber.remove(number);
 
@@ -31,6 +33,7 @@ public class HashMapDirectory implements Directory {
 
     public void updateExtensionUsingName(String surname, String newNumber) {
 
+        // updates extension number in both hashmaps by required surname
         hashMapDirectoryNumber.get(hashMapDirectorySurname.get(surname).getNumber()).setNumber(newNumber);
         hashMapDirectorySurname.get(surname).setNumber(newNumber);
 
@@ -38,6 +41,7 @@ public class HashMapDirectory implements Directory {
 
     public String lookupExtension(String surname) {
 
+        // returns extension number by required surname
         return hashMapDirectorySurname.get(surname).getNumber();
     }
 

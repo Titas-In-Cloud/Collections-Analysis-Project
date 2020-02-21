@@ -13,7 +13,6 @@ public class ArrayListDirectory implements Directory {
         for (Entry value : arrayList) {
             if (value.getSurname().equals(entry.getSurname())) {
                 surnameExists = true;
-                System.out.println("Duplicate found: " + value.getSurname());
                 break;
             }
         }

@@ -14,7 +14,6 @@ public class ArrayDirectory implements Directory {
         for (Entry value : array) {
             if (value.getSurname().equals(entry.getSurname())) {
                 surnameExists = true;
-                System.out.println("Duplicate found: " + value.getSurname());
                 break;
             }
         }
