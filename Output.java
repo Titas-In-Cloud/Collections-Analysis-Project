@@ -29,7 +29,15 @@ public class Output {
 
     public void writerCSV(Directory directory) throws IOException {
 
-        BufferedWriter br = new BufferedWriter((new FileWriter("test_directory.csv")));
+        JFileChooser directoryChooser = new JFileChooser();
+
+        directoryChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        directoryChooser.setDialogTitle("Specify CSV file save folder.");
+        directoryChooser.showSaveDialog(null);
+
+        String savePath = directoryChooser.getSelectedFile().getAbsolutePath();
+
+        BufferedWriter br = new BufferedWriter(new FileWriter(savePath + "\\directory.csv"));
         StringBuilder sb = new StringBuilder();
 
         String surname, initials, number;
