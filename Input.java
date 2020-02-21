@@ -39,8 +39,8 @@ public class Input {
                 System.out.println(" - directory -  sets which directory to initialize for usage.");
                 System.out.println(" - input -      starts manual input of entries to directory.");
                 System.out.println(" - csvIn -      reads CSV file and puts all the entries to the directory.");
-                System.out.println(" - csvOut -     puts all the directory entries to CSV file.");
-                System.out.println(" - table -      returns a table with entries in ASCII format.");
+                System.out.println(" - csvOut -     puts all the directory entries to CSV file and saves it.");
+                System.out.println(" - table -      returns a table with entries of directory in ASCII format.");
                 System.out.println(" - analysis -   runs analysis of Array, Array List and HashMap directories methods.");
                 System.out.println(" - test -       runs tests of Array, Array List and HashMap methods.");
                 System.out.println(" - exit -       ends the program.");
