@@ -9,10 +9,11 @@ public class HashMapDirectory implements Directory {
 
     public void insertEntry(Entry entry) {
 
-        // puts new entry to 2 hash maps - one with an index of surname and another of number
-        hashMapDirectorySurname.put(entry.getSurname(), entry);
-        hashMapDirectoryNumber.put(entry.getNumber(), entry);
-
+        // puts new entry to 2 hash maps if it is not a duplicate
+        if(!hashMapDirectorySurname.containsKey(entry.getSurname())) {
+            hashMapDirectorySurname.put(entry.getSurname(), entry);
+            hashMapDirectoryNumber.put(entry.getNumber(), entry);
+        }
     }
 
     public void deleteEntryUsingName(String surname) {
