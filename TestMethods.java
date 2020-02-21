@@ -12,81 +12,71 @@ public class TestMethods {
     }
 
     // tests if methods of directories are working without any bugs.
-    // before using this test method please make sure that test_data_methods.csv file is used to
-    // input new entries to directories, otherwise the testing will be incorrect. You can change
-    // input csv file in Input.java readerCSV method.
     public void testMethods(Directory directory) {
 
-        Input input = new Input();
         Output output = new Output();
 
-        System.out.println("\nTESTING OF " + directory);
-        System.out.println("From 'test_data_methods.csv' file\n");
-        System.out.println(" --- Inputs entries from test_data_methods.csv --- ");
-        System.out.println("Must be only 6 following entries (not 9 i.e. without 3 duplicates): ");
-        System.out.println("* First, F.T, 11111");
-        System.out.println("* Second,S.D,22222");
-        System.out.println("* Third,T.D,33333");
-        System.out.println("* Fourth,F.H,44444");
-        System.out.println("* Fifth,F.H,55555");
-        System.out.println("* Sixth,S.H,66666");
+        System.out.println("\nTESTING OF " + directory + "\n");
+        System.out.println(" --- Entry Method ---");
 
-        input.readerCSV(directory, false);
+        Entry entry1 = new Entry();
+        entry1.setEntry("First", "F.T", "11111");
+        directory.insertEntry(entry1);
+        System.out.println("Inserted: " + entry1.getSurname() + "," + entry1.getInitials() + "," + entry1.getNumber());
 
-        System.out.println("Directory entries after method was initialized:");
+        Entry entry2 = new Entry();
+        entry2.setEntry("Second", "S.D", "22222");
+        directory.insertEntry(entry2);
+        System.out.println("Inserted: " + entry2.getSurname() + "," + entry2.getInitials() + "," + entry2.getNumber());
+
+        Entry entry3 = new Entry();
+        entry3.setEntry("Third", "T.D", "33333");
+        directory.insertEntry(entry3);
+        System.out.println("Inserted: " + entry3.getSurname() + "," + entry3.getInitials() + "," + entry3.getNumber());
+
+        // it should not insert this entry because it is the duplicate
+        Entry entry4 = new Entry();
+        entry4.setEntry("Second", "S.D", "44444");
+        directory.insertEntry(entry4);
+        System.out.println("Was not inserted (because it is a duplicate): " + entry4.getSurname() + ","
+                + entry4.getInitials() + "," + entry4.getNumber());
+
         output.outputInTable(directory);
 
 
-        System.out.println("\n --- Lookup by extension method --- ");
-        System.out.println("Searches for 'Sixth' and 'First' extension number.");
+        System.out.println("\n --- Lookup By Surname Method --- ");
+        System.out.println("Searches for 'Second' extension number (should be 22222).");
+        System.out.println("Extension number: " + directory.lookupExtension("Second"));
 
-        System.out.println("Sixth's number: " + directory.lookupExtension("Sixth"));
-        System.out.println("First's number: " + directory.lookupExtension("First"));
-
-
-        System.out.println("\n --- Update extension number by surname method --- ");
-        System.out.println("Entry to be updated: 'Fifth' to '51515' number");
-        System.out.println("Entry to be updated: 'Fourth' to '42424' number");
-
-        directory.updateExtensionUsingName("Fifth", "51515");
-        directory.updateExtensionUsingName("Fourth", "42424");
-
-        System.out.println("Directory entries after method was initialized:");
         output.outputInTable(directory);
 
 
-        System.out.println("\n --- Delete entry by surname method --- ");
-        System.out.println("Deletes 'First' and 'Fourth' entries.");
+        System.out.println("\n --- Update Number By Surname Method --- ");
+        System.out.println("Updated 'First' extension number to '12121'.");
+        directory.updateExtensionUsingName("First", "12121");
 
-        directory.deleteEntryUsingName("First");
-        directory.deleteEntryUsingName("Fourth");
-
-        System.out.println("Directory entries after method was initialized:");
         output.outputInTable(directory);
 
 
-        System.out.println("\n --- Delete entry by extension number method --- ");
-        System.out.println("Deletes '66666' and '22222' entries");
+        System.out.println("\n --- Delete Entry By Surname Method --- ");
+        System.out.println("Entry with surname 'Third' was deleted.");
+        directory.deleteEntryUsingName("Third");
 
-        directory.deleteEntryUsingExtension("66666");
+        output.outputInTable(directory);
+
+
+        System.out.println("\n --- Delete Entry By Extension Number Method --- ");
+        System.out.println("Entry with extension number '22222' was deleted.");
         directory.deleteEntryUsingExtension("22222");
 
-        System.out.println("Directory entries after method was initialized:");
         output.outputInTable(directory);
 
 
-        System.out.println("\n --- Return Array List method --- ");
-        System.out.println("Must return array list with following left entries in the directory:");
-        System.out.println("* Third,T.D,33333");
-        System.out.println("* Fifth,F.H,51515");
-
-        System.out.println("Array List with hash codes: " + directory.toArrayList());
-        System.out.println("Which is:");
-        for(int i = 0; i < directory.toArrayList().size(); i++){
-            System.out.println("* " + directory.toArrayList().get(i).getSurname() + "," +
-                    directory.toArrayList().get(i).getInitials() + "," +
-                    directory.toArrayList().get(i).getNumber());
-        }
-        System.out.println("\n");
+        System.out.println("\n --- Return Array List Method --- ");
+        System.out.println("Must return entry's 'First,F.T,12121' hash code (" + entry1 + ").");
+        System.out.println("Returned hash code: " + directory.toArrayList());
+        System.out.println("Which is: " + directory.toArrayList().get(0).getSurname() + "," +
+                directory.toArrayList().get(0).getInitials() + "," +
+                directory.toArrayList().get(0).getNumber());
     }
 }

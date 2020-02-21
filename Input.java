@@ -201,7 +201,7 @@ public class Input {
         String line;
 
         try{
-            br = new BufferedReader(new FileReader("test_data.csv"));
+            br = new BufferedReader(new FileReader("test_data_unique.csv"));
             // reads each string line in csv file and splits it to 3 variables which are put to directory
             while ((line = br.readLine()) != null){
                 String[] entry = line.split(variablesSplitBy);
