@@ -7,8 +7,20 @@ public class ArrayListDirectory implements Directory {
 
     public void insertEntry(Entry entry) {
 
-        // adds new entry to an array list
-        arrayList.add(entry);
+        boolean surnameExists = false;
+
+        // checks if there is a duplicate surname of entry in the array list
+        for (Entry value : arrayList) {
+            if (value.getSurname().equals(entry.getSurname())) {
+                surnameExists = true;
+                System.out.println("Duplicate found: " + value.getSurname());
+                break;
+            }
+        }
+        // adds new entry to an array list if there was no duplicate added before
+        if(!surnameExists){
+            arrayList.add(entry);
+        }
     }
 
     public void deleteEntryUsingName(String surname) {

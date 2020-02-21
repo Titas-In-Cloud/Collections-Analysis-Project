@@ -10,7 +10,7 @@ public class ArrayDirectory implements Directory {
 
         boolean surnameExists = false;
 
-        // checks if there is a duplicate value of entry in the array
+        // checks if there is a duplicate surname of entry in the array
         for (Entry value : array) {
             if (value.getSurname().equals(entry.getSurname())) {
                 surnameExists = true;
