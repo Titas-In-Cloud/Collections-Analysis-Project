@@ -7,15 +7,27 @@ public class ArrayDirectory implements Directory {
     Entry[] array = new Entry[0];
 
     public void insertEntry(Entry entry) {
+        
+        boolean surnameExists = false;
 
-        // creates one size bigger temporary array
-        Entry[] temporaryArray = Arrays.copyOf(array,array.length + 1);
+        for (Entry value : array) {
+            if (value.getSurname().equals(entry.getSurname())) {
+                surnameExists = true;
+                System.out.println("Duplicate found: " + value.getSurname());
+                break;
+            }
+        }
 
-        // puts a new entry to the array
-        temporaryArray[array.length] = entry;
+        if(!surnameExists){
+            // creates one size bigger temporary array
+            Entry[] temporaryArray = Arrays.copyOf(array,array.length + 1);
 
-        // puts all the values to directory array from temporary array
-        array = temporaryArray;
+            // puts a new entry to the array
+            temporaryArray[array.length] = entry;
+
+            // puts all the values to directory array from temporary array
+            array = temporaryArray;
+        }
 
     }
 
