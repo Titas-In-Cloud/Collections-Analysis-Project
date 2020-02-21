@@ -7,9 +7,10 @@ public class ArrayDirectory implements Directory {
     Entry[] array = new Entry[0];
 
     public void insertEntry(Entry entry) {
-        
+
         boolean surnameExists = false;
 
+        // checks if there is a duplicate value of entry in the array
         for (Entry value : array) {
             if (value.getSurname().equals(entry.getSurname())) {
                 surnameExists = true;
@@ -18,17 +19,17 @@ public class ArrayDirectory implements Directory {
             }
         }
 
+        // adds a new entry to the array if there was no duplicate added before
         if(!surnameExists){
             // creates one size bigger temporary array
             Entry[] temporaryArray = Arrays.copyOf(array,array.length + 1);
 
-            // puts a new entry to the array
+            // adds a new entry to the array
             temporaryArray[array.length] = entry;
 
             // puts all the values to directory array from temporary array
             array = temporaryArray;
         }
-
     }
 
     public void deleteEntryUsingName(String surname) {
@@ -95,7 +96,6 @@ public class ArrayDirectory implements Directory {
                 entry.setNumber(newNumber);
             }
         }
-
     }
 
     public String lookupExtension(String surname) {
