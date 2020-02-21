@@ -32,7 +32,7 @@ the program. List of available actions:
 
 ### Testing
 Run 'test' function in user input. The test method checks if insertion,
-deletion, lookup and updating methods of the directories runs wihtout any bugs. 
+deletion, lookup and updating methods of the directories run without any bugs. 
 After computer initializes each method you will see a table in ASCII format 
 with resulted directory entries after method initialization.
 ### License
