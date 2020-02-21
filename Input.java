@@ -20,7 +20,7 @@ public class Input extends MainClass{
         Directory directory = null;
         boolean firstCommand = true;
 
-        System.out.print("What would you like to do? " +
+        System.out.print("-What would you like to do? " +
                 "Input 'menu' to get a list of available actions. ");
         answer = userInput.next();
 
@@ -30,27 +30,27 @@ public class Input extends MainClass{
                 if(directory.toString().contains("ArrayDirectory")) { directoryName = "Array"; }
                 if(directory.toString().contains("ArrayListDirectory")) { directoryName = "Array List"; }
                 if(directory.toString().contains("HashMapDirectory")) { directoryName = "HashMap"; }
-                System.out.println("You chosen " + directoryName + " directory.");
+                System.out.println("-You chose " + directoryName + " directory.");
             }
             else if(answer.equals("menu") || answer.equals("Menu")) {
                 System.out.println("Action menu:");
-                System.out.println(" - directory - sets which directory to initialize for usage.");
-                System.out.println(" - input - starts manual input of entries to directory.");
-                System.out.println(" - csvIn - reads CSV file and puts all the entries to the directory.");
-                System.out.println(" - csvOut - puts all the directory entries to CSV file.");
-                System.out.println(" - table - returns a table with entries in ASCII format.");
-                System.out.println(" - analysis - runs method analysis of Array, Array List and HashMap directories.");
-                System.out.println(" - exit - ends the program.");
+                System.out.println(" - directory -  sets which directory to initialize for usage.");
+                System.out.println(" - input -      starts manual input of entries to directory.");
+                System.out.println(" - csvIn -      reads CSV file and puts all the entries to the directory.");
+                System.out.println(" - csvOut -     puts all the directory entries to CSV file.");
+                System.out.println(" - table -      returns a table with entries in ASCII format.");
+                System.out.println(" - analysis -   runs analysis of Array, Array List and HashMap directories methods.");
+                System.out.println(" - exit -       ends the program.");
             }
             else if(answer.equals("exit") || answer.equals("Exit")){
-                System.out.println("Program was closed.");
+                System.out.println("-Program was closed.");
                 break;
             }
             else if(answer.equals("analysis") || answer.equals("Analysis")){
                 performanceAnalysis.directoryPerformance("Array");
                 performanceAnalysis.directoryPerformance("ArrayList");
                 performanceAnalysis.directoryPerformance("HashMap");
-                System.out.println("Analysis was done successfully and " +
+                System.out.println("-Analysis was done successfully and " +
                         "txt files were created with method running times.");
         }
             else if((answer.equals("input") || answer.equals("Input")) && directory != null) {
@@ -58,23 +58,23 @@ public class Input extends MainClass{
             }
             else if((answer.equals("csvin") || answer.equals("csvIn")) && directory != null){
                 readerCSV(directory, false);
-                System.out.println("Entries from CSV file were successfully put to the " + directoryName + " directory.");
+                System.out.println("-Entries from CSV file were successfully put to the " + directoryName + " directory.");
             }
             else if((answer.equals("csvout") || answer.equals("csvOut")) && directory != null){
                 output.writerCSV(directory);
-                System.out.println("CSV file was successfully created with entries from " + directoryName + " directory.");
+                System.out.println("-CSV file was successfully created with entries from " + directoryName + " directory.");
             }
             else if((answer.equals("table") || answer.equals("Table")) && directory != null){
                 output.outputInTable(directory);
             }
             else if(firstCommand) {
-                System.out.println("Error! Please input 'menu' to get menu of available actions. ");
+                System.out.println("-Error! Please input 'menu' to get menu of available actions. ");
                 firstCommand = false;
             }
             else if(directory == null) {
-                System.out.println("Please input 'directory' to initialize directory first.");
+                System.out.println("-Please input 'directory' to initialize directory first.");
             }
-            else System.out.println("Error! Please input 'menu' to get menu of available actions. ");
+            else System.out.println("-Error! Please input 'menu' to get menu of available actions. ");
 
             System.out.print("Action: ");
             answer = userInput.next();
@@ -85,13 +85,13 @@ public class Input extends MainClass{
 
         String directoryName;
 
-        System.out.print("Which directory you would like to use? ");
+        System.out.print("-Which directory you would like to use? ");
         directoryName = userInput.next();
 
         while (!directoryName.equals("Array") && !directoryName.equals("array")
                 && !directoryName.equals("ArrayList") && !directoryName.equals("arraylist")
                 && !directoryName.equals("HashMap") && !directoryName.equals("hashmap")) {
-            System.out.print("Error! Please choose 'Array', 'ArrayList' or 'HashMap'. ");
+            System.out.print("-Error! Please choose 'Array', 'ArrayList' or 'HashMap'. ");
             directoryName = userInput.next();
         }
         switch (directoryName) {
@@ -116,13 +116,13 @@ public class Input extends MainClass{
 
         String inputAnswer, moreInput;
 
-        System.out.print("Do you want to insert any entries to directory? ");
+        System.out.print("-Do you want to insert any entries to directory? ");
         inputAnswer = userInput.next();
 
         // checks if answer was Yes or No. Returns Error if it was not.
         while (!inputAnswer.equals("Yes") && !inputAnswer.equals("yes") &&
                 !inputAnswer.equals("No") && !inputAnswer.equals("no")) {
-            System.out.print("Error! Please choose 'Yes' or 'No'. ");
+            System.out.print("-Error! Please choose 'Yes' or 'No'. ");
             inputAnswer = userInput.next();
         }
 
@@ -133,13 +133,13 @@ public class Input extends MainClass{
 
             while(true){
 
-                System.out.print("Do you want to insert one more entry? ");
+                System.out.print("-Do you want to insert one more entry? ");
                 moreInput = userInput.next();
 
                 // checks if answer was Yes or No. Returns Error if it was not.
                 while (!moreInput.equals("Yes") && !moreInput.equals("yes") &&
                         !moreInput.equals("No") && !moreInput.equals("no")) {
-                    System.out.print("Error! Please choose 'Yes' or 'No'. ");
+                    System.out.print("-Error! Please choose 'Yes' or 'No'. ");
                     moreInput = userInput.next();
                 }
 
@@ -156,7 +156,7 @@ public class Input extends MainClass{
 
         String surname, initials, number;
 
-        System.out.println("Please input the following.");
+        System.out.println("-Please input the following.");
         System.out.print("Surname: ");
         surname = userInput.next();
         System.out.print("Initials: ");
@@ -165,7 +165,7 @@ public class Input extends MainClass{
         number = userInput.next();
 
         while(!number.matches("\\d+") || number.length() != 5){
-            System.out.print("Error! Please input a number with 5 digits: ");
+            System.out.print("-Error! Please input a number with 5 digits: ");
             number = userInput.next();
         }
 
