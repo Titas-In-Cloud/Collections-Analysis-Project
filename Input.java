@@ -38,15 +38,16 @@ public class Input {
             }
             else if(answer.equals("menu") || answer.equals("Menu")) {
                 System.out.println("Action menu:");
-                System.out.println(" - directory -  sets which directory to initialize for usage.");
-                System.out.println(" - input -      starts manual input of entries to directory.");
-                System.out.println(" - deleteName - deletes object by it's surname");
-                System.out.println(" - csvIn -      reads CSV file and puts all the entries to the directory.");
-                System.out.println(" - csvOut -     puts all the directory entries to CSV file and saves it.");
-                System.out.println(" - table -      returns a table with entries of directory in ASCII format.");
-                System.out.println(" - analysis -   runs analysis of Array, Array List and HashMap directories methods.");
-                System.out.println(" - test -       runs tests of Array, Array List and HashMap methods.");
-                System.out.println(" - exit -       ends the program.");
+                System.out.println(" - directory -    sets which directory to initialize for usage.");
+                System.out.println(" - input -        starts manual input of entries to directory.");
+                System.out.println(" - deleteName -   deletes object by it's surname.");
+                System.out.println(" - deleteNumber - deletes object by it's extension number.");
+                System.out.println(" - csvIn -        reads CSV file and puts all the entries to the directory.");
+                System.out.println(" - csvOut -       puts all the directory entries to CSV file and saves it.");
+                System.out.println(" - table -        returns a table with entries of directory in ASCII format.");
+                System.out.println(" - analysis -     runs analysis of Array, Array List and HashMap directories methods.");
+                System.out.println(" - test -         runs tests of Array, Array List and HashMap methods.");
+                System.out.println(" - exit -         ends the program.");
             }
             else if(answer.equals("exit") || answer.equals("Exit")){
                 System.out.println("-Program was closed.");
@@ -78,8 +79,26 @@ public class Input {
                 }
                 if(containsSurname){
                     directory.deleteEntryUsingName(answerToObject);
+                    System.out.println("-Object was successfully deleted.");
                 } else System.out.println("-Error! There is no object with " +
                         answerToObject + " surname in the directory");
+            }
+            else if((answer.equals("deletenumber") || answer.equals("deleteNumber")) && directory != null) {
+                System.out.print("-What object you would like to delete? Please specify it's number: ");
+                answerToObject = userInput.next();
+                boolean containsNumber = false;
+                List<Entry> list = directory.toArrayList();
+                for (Entry entry : list) {
+                    if (entry.getNumber().equals(answerToObject)) {
+                        containsNumber = true;
+                        break;
+                    }
+                }
+                if(containsNumber){
+                    directory.deleteEntryUsingExtension(answerToObject);
+                    System.out.println("-Object was successfully deleted.");
+                } else System.out.println("-Error! There is no object with " +
+                        answerToObject + " extension number in the directory");
             }
             else if((answer.equals("csvin") || answer.equals("csvIn")) && directory != null){
                 readerCSV(directory, false);
