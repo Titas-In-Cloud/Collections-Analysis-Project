@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.List;
 
 public class Output {
-
+    // creates ASCII format table of all the entries in directory
     public void outputInTable(Directory directory){
 
         String leftAlignFormat = "| %-14s | %-9s | %-9s |%n";
@@ -27,14 +27,17 @@ public class Output {
         System.out.format("+----------------+-----------+-----------+%n");
     }
 
+    // writes all the entries in the directory to csv file
     public void writerCSV(Directory directory) throws IOException {
 
         JFileChooser directoryChooser = new JFileChooser();
 
+        // formats dialog box
         directoryChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         directoryChooser.setDialogTitle("Specify CSV file save folder.");
         directoryChooser.showSaveDialog(null);
 
+        // opens a dialog box which lets user choose where to save created csv file
         String savePath = directoryChooser.getSelectedFile().getAbsolutePath();
 
         BufferedWriter br = new BufferedWriter(new FileWriter(savePath + "\\directory_entries.csv"));
@@ -45,6 +48,7 @@ public class Output {
         List<Entry> list;
         list = directory.toArrayList();
 
+        // writes all the entries from the directory to csv file
         for (Entry entry : list) {
             surname = entry.getSurname();
             initials = entry.getInitials();
@@ -63,15 +67,18 @@ public class Output {
 
     }
 
+    // creates performance analysis of methods txt runtime file.
     public void performanceAnalysisTxtFile(String directoryType, double[] averageExecutionTime,
                                            double[] bestExecutionTime, double[] worstExecutionTime) throws IOException{
 
         JFileChooser directoryChooser = new JFileChooser();
 
+        // formats dialog box
         directoryChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         directoryChooser.setDialogTitle("Specify " + directoryType + " analysis.txt Save Folder");
         directoryChooser.showSaveDialog(null);
 
+        // opens a dialog box which lets user choose where to save created txt file
         String savePath = directoryChooser.getSelectedFile().getAbsolutePath();
 
         if(directoryType.equals("Array")){

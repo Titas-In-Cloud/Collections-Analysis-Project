@@ -13,6 +13,7 @@ public class Input {
     PerformanceAnalysis performanceAnalysis = new PerformanceAnalysis();
     TestMethods testMethods = new TestMethods();
 
+    // user input menu where the methods are called to be executed
     public void userMenu() throws IOException {
 
         String answer;
@@ -85,6 +86,7 @@ public class Input {
         }
     }
 
+    // asks user which directory he wants to choose for usage
     public Directory whichDirectory(){
 
         String directoryName;
@@ -92,6 +94,7 @@ public class Input {
         System.out.print("-Which directory you would like to use? ");
         directoryName = userInput.next();
 
+        // checks if inputted value is a valid directory
         while (!directoryName.equals("Array") && !directoryName.equals("array")
                 && !directoryName.equals("ArrayList") && !directoryName.equals("arraylist")
                 && !directoryName.equals("HashMap") && !directoryName.equals("hashmap")) {
@@ -116,6 +119,7 @@ public class Input {
         }
     }
 
+    // checks if user wants to add entries manually or not
     public void userInputCheck(Directory directory){
 
         String inputAnswer, moreInput;
@@ -132,7 +136,7 @@ public class Input {
 
         if(inputAnswer.equals("Yes") || inputAnswer.equals("yes")){
 
-            // calls entry input method
+            // calls manual entry entry method
             userInput(directory);
 
             while(true){
@@ -156,6 +160,7 @@ public class Input {
         }
     }
 
+    // manual user input of entries
     public void userInput(Directory directory) {
 
         String surname, initials, number;
@@ -168,6 +173,7 @@ public class Input {
         System.out.print("Extension number: ");
         number = userInput.next();
 
+        // number must be 5 digit integer
         while(!number.matches("\\d+") || number.length() != 5){
             System.out.print("-Error! Please input a number with 5 digits: ");
             number = userInput.next();
@@ -179,6 +185,8 @@ public class Input {
         directory.insertEntry(newEntry);
     }
 
+    // method which reads csv file and puts objects to directory
+    // countTime - tells if there is need to count elapsed time of entry method or not
     public ArrayList<Double> readerCSV(Directory directory, boolean countTime) {
 
         StopWatch stopWatch = new StopWatch();
@@ -193,12 +201,14 @@ public class Input {
 
         try{
             br = new BufferedReader(new FileReader("test_data_methods.csv"));
+            // reads each string line in csv file and splits it to 3 variables which are put to directory
             while ((line = br.readLine()) != null){
                 String[] entry = line.split(variablesSplitBy);
 
                 Entry newEntry = new Entry();
                 newEntry.setEntry(entry[0], entry[1], entry[2]);
 
+                // counts elapsed time of insertEntry method if countTime is true
                 if(countTime){
                     stopWatch.start();
                     directory.insertEntry(newEntry);
