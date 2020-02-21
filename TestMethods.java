@@ -1,4 +1,5 @@
 public class TestMethods {
+    // runs testMethods method with all 3 directories
     public void runTestMethods(){
 
         Directory arrayDirectory = new ArrayDirectory();
@@ -10,6 +11,9 @@ public class TestMethods {
         testMethods(hashMapDirectory);
     }
 
+    // tests if methods of directories are working without any bugs.
+    // before using this test method please make sure that test_data_methods.csv file is used to
+    // input new entries to directories, otherwise the testing will be incorrect.
     public void testMethods(Directory directory) {
 
         Input input = new Input();

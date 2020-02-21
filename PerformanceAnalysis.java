@@ -33,8 +33,10 @@ public class PerformanceAnalysis {
             if(directoryType.equals("ArrayList")) { newDirectory = new ArrayListDirectory(); }
             if(directoryType.equals("HashMap")) { newDirectory = new HashMapDirectory(); }
 
+            // get execution times of input method in array list
             executionTimeList = input.readerCSV(newDirectory, true);
 
+            // checks if each execution time is worse or better than before tested method times
             for (Double aDouble : executionTimeList) {
                 totalExecutionTimeEntry += aDouble;
                 if (aDouble <= bestExecutionTime[0]) {
@@ -48,6 +50,7 @@ public class PerformanceAnalysis {
             // finds an object's surname in the middle of the directory
             surname = directoryMiddleSurnameFinder(newDirectory);
 
+            // counts execution time of lookup extension method
             stopWatch.start();
             newDirectory.lookupExtension(surname);
             stopWatch.stop();
@@ -55,10 +58,12 @@ public class PerformanceAnalysis {
             executionTime = stopWatch.getElapsedTime();
             stopWatch.reset();
 
+            // checks if time was worse or better than during past tests
             totalExecutionTimeLookup += executionTime;
             if(executionTime <= bestExecutionTime[1]) { bestExecutionTime[1] = executionTime; }
             if(executionTime >= worstExecutionTime[1]) { worstExecutionTime[1] = executionTime; }
 
+            // counts execution time of delete entry by surname method
             stopWatch.start();
             newDirectory.deleteEntryUsingName(surname);
             stopWatch.stop();
@@ -66,6 +71,7 @@ public class PerformanceAnalysis {
             executionTime = stopWatch.getElapsedTime();
             stopWatch.reset();
 
+            // checks if time was worse or better than during past tests
             totalExecutionTimeDeletionSurname += executionTime;
             if(executionTime <= bestExecutionTime[2]) { bestExecutionTime[2] = executionTime; }
             if(executionTime >= worstExecutionTime[2]) { worstExecutionTime[2] = executionTime; }
@@ -73,6 +79,7 @@ public class PerformanceAnalysis {
             // finds an object's number in the middle of the directory
             number = directoryMiddleNumberFinder(newDirectory);
 
+            // counts execution time of delete entry by extension method
             stopWatch.start();
             newDirectory.deleteEntryUsingExtension(number);
             stopWatch.stop();
@@ -80,25 +87,30 @@ public class PerformanceAnalysis {
             executionTime = stopWatch.getElapsedTime();
             stopWatch.reset();
 
+            // checks if time was worse or better than during past tests
             totalExecutionTimeDeletionNumber += executionTime;
             if(executionTime <= bestExecutionTime[3]) { bestExecutionTime[3] = executionTime; }
             if(executionTime >= worstExecutionTime[3]) { worstExecutionTime[3] = executionTime; }
         }
 
+        // counts average execution times of each method
         averageExecutionTime[0] = totalExecutionTimeEntry / 10000 / executionTimeList.size();
         averageExecutionTime[1] = totalExecutionTimeLookup / 10000;
         averageExecutionTime[2] = totalExecutionTimeDeletionSurname / 10000;
         averageExecutionTime[3] = totalExecutionTimeDeletionNumber / 10000;
 
+        // calls a method which writes all the results to the txt file and saves it
         output.performanceAnalysisTxtFile(directoryType, averageExecutionTime, bestExecutionTime, worstExecutionTime);
     }
 
+    // finds an entry which is in the middle of the directory and returns it's surname
     public String directoryMiddleSurnameFinder(Directory directory){
 
         List<Entry> list = directory.toArrayList();
         return list.get(list.size()/2).getSurname();
     }
 
+    // finds an entry which is in the middle of the directory and returns it's number
     public String directoryMiddleNumberFinder(Directory directory){
 
         List<Entry> list = directory.toArrayList();
